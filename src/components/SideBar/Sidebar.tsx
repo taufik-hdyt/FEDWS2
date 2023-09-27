@@ -45,6 +45,7 @@ state= {
     alert(e)
   }
 
+
   render() {
     const data= this.props.data
     return (
@@ -59,8 +60,8 @@ state= {
         </HStack>
 
         <InputGroup size="md" mt={4}>
-          <Input borderColor="black" borderRight="none" placeholder="Search" />
-          <InputRightAddon children={<BsSearch />} />
+          <Input  borderColor="black" borderRight="none" placeholder="Search" />
+          <InputRightAddon bg='linear-gradient(to right,gray, white)' children={<BsSearch />} />
         </InputGroup>
 
         <HStack cursor='pointer' onClick={()=> this.openCategory(!this.state.openCategory)} align="center" justify="space-between" mt={10} pl="6">
@@ -100,9 +101,10 @@ state= {
         <VStack align="start" pl={8} mt={2}>
           {
             data?.map((e)=> (
-              <Checkbox onChange={()=> this.onSelect(e.tag)} size="lg" colorScheme="green" defaultChecked>
-              {e.tag}
-            </Checkbox>
+              <HStack>
+              <Checkbox onChange={()=> this.onSelect(e.tag)} size="lg" colorScheme="purple"/>
+              <Text px={2} rounded='lg' color='white' bg='purple'>{e.tag}</Text>
+              </HStack>
             ))
           }
         </VStack>
