@@ -1,6 +1,6 @@
 import React from "react";
 import CardProduct from "../components/Card/Card";
-import {  Grid, GridItem } from "@chakra-ui/react";
+import {  Grid, GridItem, Skeleton } from "@chakra-ui/react";
 import Sidebar from "../components/SideBar/Sidebar";
 import axios from "axios";
 
@@ -21,11 +21,12 @@ export default class Home extends React.Component {
   }
 
   async getData(){
+
       try {
         const response = await axios.get('https://api.npoint.io/624c99ed50dcd45fb160')
-        this.setState({
-          data: response.data
-        })
+          this.setState({
+            data: response.data,
+          })
       } catch (error) {
         console.log(error)
       }
@@ -36,6 +37,9 @@ export default class Home extends React.Component {
   }
 
   render() {
+
+    const {data} = this.state
+
     // const dataDummy = [
     //   {
     //     name: "Donout",
@@ -80,14 +84,15 @@ export default class Home extends React.Component {
     // ];
     return (
         <Grid gridTemplateColumns="350px 1fr">
-          <Sidebar data={this.state.data} />
-
+          <Sidebar data={data} />
           <GridItem p={8} bg="blue.200">
+              <Skeleton isLoaded>
             <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={4} rowGap={6}>
               {this.state.data?.map((e: IData,idx: number) => (
                 <CardProduct badge={e.badge} key={idx} name={e.name} description={e.description} image={e.imageUrl}  />
               ))}
             </Grid>
+          </Skeleton>
           </GridItem>
         </Grid>
     );
