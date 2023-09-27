@@ -21,7 +21,6 @@ export default class Home extends React.Component {
   }
 
   async getData(){
-
       try {
         const response = await axios.get('https://api.npoint.io/624c99ed50dcd45fb160')
           this.setState({
